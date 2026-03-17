@@ -1,299 +1,526 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>我们的浪漫小站</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="我们的浪漫小站 - 记录属于我们的故事">
+  <title>我们的浪漫小站</title>
 
-<style>
-*{box-sizing:border-box}
-body{
-margin:0;
-font-family:"Segoe UI",Arial,sans-serif;
-background:linear-gradient(180deg,#1e1b4b,#312e81);
-color:white;
-}
+  <style>
+    /* 重置和全局样式 */
+    * {
+      box-sizing: border-box;
+    }
 
-header{
-background:rgba(0,0,0,0.35);
-padding:20px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-backdrop-filter:blur(6px);
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-header h1{margin:0;font-size:22px}
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(180deg, #1e1b4b, #312e81);
+      color: white;
+      line-height: 1.6;
+    }
 
-nav a{
-color:white;
-margin-left:20px;
-text-decoration:none;
-font-size:15px;
-opacity:.9
-}
-nav a:hover{opacity:1}
+    /* Header 样式 */
+    header {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
 
-.page{display:none;padding:80px 20px;text-align:center}
-.page.active{display:block}
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 600;
+    }
 
-.hero{
-padding:140px 20px;
-background:linear-gradient(135deg,#ff6ec4,#7873f5);
-}
+    nav {
+      display: flex;
+      gap: 20px;
+    }
 
-.hero h2{font-size:52px;margin-bottom:10px}
-.hero p{font-size:20px}
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
 
-.btn{
-margin-top:25px;
-display:inline-block;
-padding:14px 32px;
-background:white;
-color:#ff4fa3;
-text-decoration:none;
-border-radius:30px;
-font-weight:bold;
-}
+    nav a:hover,
+    nav a:focus {
+      opacity: 1;
+      outline: none;
+    }
 
-.days{
-font-size:46px;
-margin-top:30px;
-color:#ffd1f0;
-}
+    /* 页面容器 */
+    .page {
+      display: none;
+      padding: 80px 20px;
+      text-align: center;
+      min-height: calc(100vh - 80px);
+      animation: fadeIn 0.5s ease-in;
+    }
 
-.cards{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:25px;
-margin-top:40px
-}
+    .page.active {
+      display: block;
+    }
 
-.card{
-background:rgba(255,255,255,0.08);
-padding:25px;
-width:260px;
-border-radius:16px;
-backdrop-filter:blur(6px);
-transition:.3s
-}
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
 
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 15px 40px rgba(0,0,0,.5)
-}
+    /* Hero 部分 */
+    .hero {
+      padding: 140px 20px;
+      background: linear-gradient(135deg, #ff6ec4, #7873f5);
+    }
 
-.gallery{
-max-width:1000px;
-margin:auto;
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-gap:15px;
-margin-top:40px
-}
+    .hero h2 {
+      font-size: 52px;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
 
-.gallery img{
-width:100%;
-border-radius:12px;
-height:200px;
-object-fit:cover;
-transition:.3s
-}
+    .hero p {
+      font-size: 20px;
+      margin: 0;
+      opacity: 0.95;
+    }
 
-.gallery img:hover{
-transform:scale(1.05)
-}
+    /* 按钮样式 */
+    .btn {
+      margin-top: 25px;
+      display: inline-block;
+      padding: 14px 32px;
+      background: white;
+      color: #ff4fa3;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
 
-.love-text{
-max-width:700px;
-margin:auto;
-font-size:18px;
-line-height:1.8
-}
+    .btn:hover,
+    .btn:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      outline: none;
+    }
 
-footer{
-text-align:center;
-padding:30px;
-background:#0f0c29;
-margin-top:60px;
-font-size:14px;
-opacity:.7
-}
+    .btn:active {
+      transform: translateY(0);
+    }
 
-.heart{
-position:fixed;
-color:#ff6ec4;
-animation:float 6s linear infinite;
-opacity:.6
-}
+    /* 恋爱天数 */
+    .days {
+      font-size: 46px;
+      margin-top: 30px;
+      color: #ffd1f0;
+      font-weight: 700;
+    }
 
-@keyframes float{
-0%{transform:translateY(100vh)}
-100%{transform:translateY(-10vh)}
-}
+    /* 卡片容器 */
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 40px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-@media(max-width:700px){
-.hero h2{font-size:38px}
-}
-</style>
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 25px;
+      width: 260px;
+      border-radius: 16px;
+      backdrop-filter: blur(6px);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card h3 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .card p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 14px;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* 图库 */
+    .gallery {
+      max-width: 1000px;
+      margin: 40px auto 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      display: block;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* 文本内容 */
+    .love-text {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .love-text p {
+      white-space: pre-line;
+      margin: 20px 0;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #0f0c29;
+      margin-top: 60px;
+      font-size: 14px;
+      opacity: 0.7;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* 爱心动画 */
+    .heart {
+      position: fixed;
+      color: #ff6ec4;
+      animation: float 6s linear infinite;
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 1;
+      font-size: 20px;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(100px);
+        opacity: 0;
+      }
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      header h1 {
+        font-size: 20px;
+      }
+
+      nav {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav a {
+        font-size: 14px;
+      }
+
+      .page {
+        padding: 60px 15px;
+      }
+
+      .hero {
+        padding: 100px 20px;
+      }
+
+      .hero h2 {
+        font-size: 38px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+      }
+
+      .gallery img {
+        height: 150px;
+      }
+
+      .love-text {
+        font-size: 16px;
+      }
+
+      .days {
+        font-size: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 18px;
+      }
+
+      nav {
+        gap: 8px;
+      }
+
+      nav a {
+        font-size: 13px;
+      }
+
+      .hero h2 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+
+      .days {
+        font-size: 28px;
+      }
+
+      .cards {
+        gap: 15px;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-<h1>❤️ 我们的浪漫小站</h1>
+  <header>
+    <h1>❤️ 我们的浪漫小站</h1>
 
-<nav>
-<a href="#" onclick="showPage('home')">首页</a>
-<a href="#" onclick="showPage('days')">恋爱天数</a>
-<a href="#" onclick="showPage('story')">我们的故事</a>
-<a href="#" onclick="showPage('gallery')">照片墙</a>
-<a href="#" onclick="showPage('love')">告白</a>
-</nav>
-</header>
+    <nav>
+      <a href="#home" onclick="showPage('home'); return false;">首页</a>
+      <a href="#days" onclick="showPage('days'); return false;">恋爱天数</a>
+      <a href="#story" onclick="showPage('story'); return false;">我们的故事</a>
+      <a href="#gallery" onclick="showPage('gallery'); return false;">照片墙</a>
+      <a href="#love" onclick="showPage('love'); return false;">告白</a>
+    </nav>
+  </header>
 
-<!-- 首页 -->
-<section id="home" class="page active hero">
-<h2>遇见你是最美的意外</h2>
-<p>这是属于我们的专属小世界</p>
-<a class="btn" onclick="showPage('days')">看看我们在一起多久了</a>
-</section>
+  <!-- 首页 -->
+  <section id="home" class="page active hero">
+    <h2>遇见你是最美的意外</h2>
+    <p>这是属于我们的专属小世界</p>
+    <button class="btn" onclick="showPage('days')">看看我们在一起多久了</button>
+  </section>
 
-<!-- 恋爱天数 -->
-<section id="days" class="page">
-<h2>我们已经在一起</h2>
-<div class="days" id="loveDays">0 天</div>
-<p>时间在走，但喜欢你从没停过 ❤️</p>
-</section>
+  <!-- 恋爱天数 -->
+  <section id="days" class="page">
+    <h2>我们已经在一起</h2>
+    <div class="days" id="loveDays">0 天</div>
+    <p>时间在走，但喜欢你从没停过 ❤️</p>
+  </section>
 
-<!-- 故事 -->
-<section id="story" class="page">
-<h2>我们的故事</h2>
-<div class="love-text">
-<p>
-世界很大，但我们刚好相遇。
+  <!-- 故事 -->
+  <section id="story" class="page">
+    <h2>我们的故事</h2>
+    <div class="love-text">
+      <p>
+        世界很大，但我们刚好相遇。
 
-从第一次见面，到慢慢熟悉，再到彼此陪伴。
+        从第一次见面，到慢慢熟悉，再到彼此陪伴。
 
-这里记录着属于我们的故事。
-</p>
-</div>
+        这里记录着属于我们的故事。
+      </p>
+    </div>
 
-<div class="cards">
-<div class="card">
-<h3>第一次见面</h3>
-<p>那一天开始，一切都变得不一样了。</p>
-</div>
+    <div class="cards">
+      <div class="card">
+        <h3>第一次见面</h3>
+        <p>那一天开始，一切都变得不一样了。</p>
+      </div>
 
-<div class="card">
-<h3>第一次约会</h3>
-<p>紧张又开心的一天。</p>
-</div>
+      <div class="card">
+        <h3>第一次约会</h3>
+        <p>紧张又开心的一天。</p>
+      </div>
 
-<div class="card">
-<h3>未来</h3>
-<p>希望未来每一天都有你。</p>
-</div>
-</div>
+      <div class="card">
+        <h3>未来</h3>
+        <p>希望未来每一天都有你。</p>
+      </div>
+    </div>
+  </section>
 
-</section>
+  <!-- 照片墙 -->
+  <section id="gallery" class="page">
+    <h2>我们的照片墙</h2>
 
-<!-- 照片墙 -->
-<section id="gallery" class="page">
-<h2>我们的照片墙</h2>
+    <div class="gallery">
+      <img src="https://www.imgur.la/images/2026/03/17/1921_livephoto.HEIC.jpg" alt="我们的照片 1">
+      <img src="https://www.imgur.la/images/2026/03/17/027eacd68734d211685afaf0430c1cf0.jpg" alt="我们的照片 2">
+      <img src="https://www.imgur.la/images/2026/03/17/we1.jpg" alt="我们的照片 3">
+      <img src="https://www.imgur.la/images/2026/03/17/we2.jpg" alt="我们的照片 4">
+      <img src="https://www.imgur.la/images/2026/03/17/we3.jpg" alt="我们的照片 5">
+      <img src="https://www.imgur.la/images/2026/03/17/we4.jpg" alt="我们的照片 6">
+    </div>
 
-<div class="gallery">
+    <p style="margin-top: 30px;">把这些图片换成你们的照片会更浪漫 📷</p>
+  </section>
 
-<img src="https://www.imgur.la/images/2026/03/17/1921_livephoto.HEIC.jpg">
-<img src="https://www.imgur.la/images/2026/03/17/027eacd68734d211685afaf0430c1cf0.jpg">
-<img src="https://www.imgur.la/images/2026/03/17/we1.jpg">
-<img src="https://www.imgur.la/images/2026/03/17/we2.jpg">
-<img src="https://www.imgur.la/images/2026/03/17/we3.jpg">
-<img src="https://www.imgur.la/images/2026/03/17/we4.jpg">
+  <!-- 告白 -->
+  <section id="love" class="page">
+    <h2>给你的话</h2>
 
-</div>
+    <div class="love-text">
+      <p>
+        如果世界有尽头，我希望最后看到的人是你。
 
-<p style="margin-top:30px">把这些图片换成你们的照片会更浪漫 📷</p>
+        如果时间可以停留，我希望停在与你相视而笑的那一刻。
 
-</section>
+        谢谢你来到我的世界 ❤️
+      </p>
+    </div>
+  </section>
 
-<!-- 告白 -->
-<section id="love" class="page">
-<h2>给你的话</h2>
+  <footer>
+    <p>❤️ 只属于我们的网页 | 2026</p>
+  </footer>
 
-<div class="love-text">
-<p>
-如果世界有尽头，我希望最后看到的人是你。
+  <script>
+    // 页面切换函数
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
 
-如果时间可以停留，我希望停在与你相视而笑的那一刻。
+      const targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
 
-谢谢你来到我的世界 ❤️
-</p>
-</div>
+    // 恋爱天数计算
+    (function initLoveDays() {
+      const startDate = new Date('2024-12-14');
 
-</section>
+      function updateLoveDays() {
+        const today = new Date();
+        const diff = today - startDate;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-<footer>
-<p>❤️ 只属于我们的网页 | 2026</p>
-</footer>
+        const el = document.getElementById('loveDays');
+        if (el) {
+          el.textContent = `${days} 天`;
+        }
+      }
 
-<script>
+      updateLoveDays();
+      // 每天更新一次（可选）
+      // setInterval(updateLoveDays, 1000 * 60 * 60 * 24);
+    })();
 
-function showPage(pageId){
+    // 爱心动画
+    (function initHeartAnimation() {
+      const maxHearts = 5; // 限制同时存在的爱心数量
+      let currentHearts = 0;
 
-const pages=document.querySelectorAll('.page')
-pages.forEach(p=>p.classList.remove('active'))
+      function createHeart() {
+        if (currentHearts >= maxHearts) return;
 
-document.getElementById(pageId).classList.add('active')
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = '❤';
 
-window.scrollTo(0,0)
-}
+        const randomLeft = Math.random() * 100;
+        const randomSize = 10 + Math.random() * 20;
+        const randomDuration = 4 + Math.random() * 4;
 
-// 恋爱天数计算
+        heart.style.left = `${randomLeft}vw`;
+        heart.style.fontSize = `${randomSize}px`;
+        heart.style.animationDuration = `${randomDuration}s`;
 
-const startDate=new Date("2024-12-14")
+        document.body.appendChild(heart);
+        currentHearts++;
 
-function updateLoveDays(){
+        setTimeout(() => {
+          heart.remove();
+          currentHearts--;
+        }, randomDuration * 1000);
+      }
 
-const today=new Date()
-
-const diff=today-startDate
-
-const days=Math.floor(diff/(1000*60*60*24))
-
-const el=document.getElementById("loveDays")
-
-if(el) el.innerText=days+" 天"
-}
-
-updateLoveDays()
-
-// 爱心动画
-
-function createHeart(){
-
-const heart=document.createElement("div")
-heart.className="heart"
-heart.innerHTML="❤"
-
-heart.style.left=Math.random()*100+"vw"
-heart.style.fontSize=(10+Math.random()*20)+"px"
-heart.style.animationDuration=(4+Math.random()*4)+"s"
-
-document.body.appendChild(heart)
-
-setTimeout(()=>{
-heart.remove()
-},6000)
-
-}
-
-setInterval(createHeart,300)
-
-</script>
+      // 每 500ms 创建一个爱心
+      setInterval(createHeart, 500);
+    })();
+  </script>
 
 </body>
 </html>
