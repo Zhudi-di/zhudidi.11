@@ -1,50 +1,146 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>我的个人网站</title>
 
 <style>
+
 body{
-    font-family: Arial;
-    background: linear-gradient(120deg,#6a11cb,#2575fc);
+    margin:0;
+    font-family:Arial;
+    background:#0f172a;
     color:white;
-    text-align:center;
-    padding-top:100px;
 }
 
-h1{
+header{
+    background:#1e293b;
+    padding:20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+}
+
+nav{
+    margin-top:10px;
+}
+
+nav a{
+    color:white;
+    margin:0 15px;
+    text-decoration:none;
+}
+
+.hero{
+    text-align:center;
+    padding:120px 20px;
+    background:linear-gradient(135deg,#4f46e5,#06b6d4);
+}
+
+.hero h2{
     font-size:50px;
 }
 
-p{
+.hero p{
     font-size:20px;
 }
 
-button{
+.btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 25px;
     background:white;
-    color:#2575fc;
-    border:none;
-    padding:15px 30px;
-    font-size:18px;
+    color:#4f46e5;
     border-radius:8px;
-    cursor:pointer;
+    text-decoration:none;
 }
 
-button:hover{
-    background:#eee;
+.section{
+    padding:60px 20px;
+    text-align:center;
 }
+
+.cards{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:#1e293b;
+    padding:30px;
+    border-radius:10px;
+    width:250px;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:#020617;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<h1>欢迎来到我的网站</h1>
+<header>
+<h1>我的个人网站</h1>
 
-<p>这是我用 GitHub Pages 创建的第一个网站</p>
+<nav>
+<a href="#">首页</a>
+<a href="#">关于我</a>
+<a href="#">项目</a>
+<a href="#">联系</a>
+</nav>
 
-<button onclick="alert('欢迎访问！')">点击我</button>
+</header>
+
+<section class="hero">
+
+<h2>欢迎来到我的网站</h2>
+
+<p>这是我用 GitHub Pages 做的个人主页</p>
+
+<a class="btn" href="#">了解更多</a>
+
+</section>
+
+<section class="section">
+
+<h2>我们</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>2024.12.14</h3>
+<p>你好</p>
+</div>
+
+<div class="card">
+<h3>猪猪大王</h3>
+<p>猪猪大王第二厉害</p>
+</div>
+
+<div class="card">
+<h3>鱼丸大王</h3>
+<p>鱼丸大王是最厉害的</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 我的个人网站</p>
+
+</footer>
 
 </body>
 </html>
