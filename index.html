@@ -6,59 +6,49 @@
 <title>我们的浪漫小站</title>
 
 <style>
-
 *{box-sizing:border-box}
-
 body{
 margin:0;
-font-family:"Segoe UI", Arial, sans-serif;
+font-family:"Segoe UI",Arial,sans-serif;
 background:linear-gradient(180deg,#1e1b4b,#312e81);
 color:white;
 }
 
 header{
-background:rgba(0,0,0,0.3);
+background:rgba(0,0,0,0.35);
 padding:20px 40px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+position:sticky;
+top:0;
 backdrop-filter:blur(6px);
 }
 
-header h1{
-margin:0;
-font-size:22px;
-letter-spacing:1px;
-}
+header h1{margin:0;font-size:22px}
 
 nav a{
 color:white;
 margin-left:20px;
 text-decoration:none;
 font-size:15px;
-opacity:0.9;
+opacity:.9
 }
-
 nav a:hover{opacity:1}
 
+.page{display:none;padding:80px 20px;text-align:center}
+.page.active{display:block}
+
 .hero{
-text-align:center;
-padding:150px 20px;
+padding:140px 20px;
 background:linear-gradient(135deg,#ff6ec4,#7873f5);
 }
 
-.hero h2{
-font-size:56px;
-margin-bottom:10px;
-}
-
-.hero p{
-font-size:20px;
-opacity:0.95;
-}
+.hero h2{font-size:52px;margin-bottom:10px}
+.hero p{font-size:20px}
 
 .btn{
-margin-top:30px;
+margin-top:25px;
 display:inline-block;
 padding:14px 32px;
 background:white;
@@ -68,54 +58,76 @@ border-radius:30px;
 font-weight:bold;
 }
 
-.btn:hover{
-transform:translateY(-2px);
-}
-
-.section{
-padding:80px 20px;
-text-align:center;
-}
-
-.section h2{
-font-size:34px;
-margin-bottom:40px;
+.days{
+font-size:46px;
+margin-top:30px;
+color:#ffd1f0;
 }
 
 .cards{
 display:flex;
 justify-content:center;
-gap:25px;
 flex-wrap:wrap;
+gap:25px;
+margin-top:40px
 }
 
 .card{
 background:rgba(255,255,255,0.08);
-padding:30px;
+padding:25px;
 width:260px;
 border-radius:16px;
 backdrop-filter:blur(6px);
-transition:transform 0.3s, box-shadow 0.3s;
+transition:.3s
 }
 
 .card:hover{
 transform:translateY(-10px);
-box-shadow:0 15px 40px rgba(0,0,0,0.5);
+box-shadow:0 15px 40px rgba(0,0,0,.5)
+}
+
+.gallery{
+max-width:1000px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+gap:15px;
+margin-top:40px
+}
+
+.gallery img{
+width:100%;
+border-radius:12px;
+height:200px;
+object-fit:cover;
+transition:.3s
+}
+
+.gallery img:hover{
+transform:scale(1.05)
 }
 
 .love-text{
 max-width:700px;
 margin:auto;
 font-size:18px;
-line-height:1.8;
-opacity:0.95;
+line-height:1.8
+}
+
+footer{
+text-align:center;
+padding:30px;
+background:#0f0c29;
+margin-top:60px;
+font-size:14px;
+opacity:.7
 }
 
 .heart{
 position:fixed;
 color:#ff6ec4;
 animation:float 6s linear infinite;
-opacity:0.6;
+opacity:.6
 }
 
 @keyframes float{
@@ -123,30 +135,10 @@ opacity:0.6;
 100%{transform:translateY(-10vh)}
 }
 
-footer{
-text-align:center;
-padding:30px 20px;
-background:#0f0c29;
-margin-top:60px;
-font-size:14px;
-opacity:0.7;
+@media(max-width:700px){
+.hero h2{font-size:38px}
 }
-
-@media (max-width:700px){
-
-header{
-flex-direction:column;
-gap:10px;
-}
-
-.hero h2{
-font-size:40px;
-}
-
-}
-
 </style>
-
 </head>
 
 <body>
@@ -155,72 +147,84 @@ font-size:40px;
 <h1>❤️ 我们的浪漫小站</h1>
 
 <nav>
-<a href="#home">首页</a>
-<a href="#story">我们的故事</a>
-<a href="#memories">回忆</a>
-<a href="#love">告白</a>
+<a href="#" onclick="showPage('home')">首页</a>
+<a href="#" onclick="showPage('days')">恋爱天数</a>
+<a href="#" onclick="showPage('story')">我们的故事</a>
+<a href="#" onclick="showPage('gallery')">照片墙</a>
+<a href="#" onclick="showPage('love')">告白</a>
 </nav>
 </header>
 
-<section id="home" class="hero">
-
+<!-- 首页 -->
+<section id="home" class="page active hero">
 <h2>遇见你是最美的意外</h2>
-
 <p>这是属于我们的专属小世界</p>
-
-<a class="btn" href="#story">开始阅读</a>
-
+<a class="btn" onclick="showPage('days')">看看我们在一起多久了</a>
 </section>
 
-<section id="story" class="section">
+<!-- 恋爱天数 -->
+<section id="days" class="page">
+<h2>我们已经在一起</h2>
+<div class="days" id="loveDays">0 天</div>
+<p>时间在走，但喜欢你从没停过 ❤️</p>
+</section>
 
+<!-- 故事 -->
+<section id="story" class="page">
 <h2>我们的故事</h2>
-
 <div class="love-text">
-
 <p>
-也许世界很大，但我们刚好相遇。
+世界很大，但我们刚好相遇。
 
 从第一次见面，到慢慢熟悉，再到彼此陪伴。
 
-这里记录着属于我们的每一个瞬间。
+这里记录着属于我们的故事。
 </p>
-
 </div>
 
-</section>
-
-<section id="memories" class="section">
-
-<h2>甜蜜回忆</h2>
-
 <div class="cards">
-
 <div class="card">
 <h3>第一次见面</h3>
 <p>那一天开始，一切都变得不一样了。</p>
 </div>
 
 <div class="card">
-<h3>一起的时光</h3>
-<p>普通的日子，因为你而变得闪闪发光。</p>
+<h3>第一次约会</h3>
+<p>紧张又开心的一天。</p>
 </div>
 
 <div class="card">
 <h3>未来</h3>
-<p>希望未来的每一天，都有你在身边。</p>
+<p>希望未来每一天都有你。</p>
 </div>
-
 </div>
 
 </section>
 
-<section id="love" class="section">
+<!-- 照片墙 -->
+<section id="gallery" class="page">
+<h2>我们的照片墙</h2>
 
+<div class="gallery">
+
+<img src="https://picsum.photos/400/300?1">
+<img src="https://picsum.photos/400/300?2">
+<img src="https://picsum.photos/400/300?3">
+<img src="https://picsum.photos/400/300?4">
+<img src="https://picsum.photos/400/300?5">
+<img src="https://picsum.photos/400/300?6">
+
+</div>
+
+<p style="margin-top:30px">把这些图片换成你们的照片会更浪漫 📷</p>
+
+</section>
+
+<!-- 告白 -->
+<section id="love" class="page">
 <h2>给你的话</h2>
 
 <div class="love-text">
-
 <p>
 如果世界有尽头，我希望最后看到的人是你。
 
@@ -228,20 +232,46 @@ font-size:40px;
 
 谢谢你来到我的世界 ❤️
 </p>
-
 </div>
 
 </section>
 
 <footer>
-
 <p>❤️ 只属于我们的网页 | 2026</p>
-
 </footer>
 
-<!-- 飘动的爱心 -->
-
 <script>
+
+function showPage(pageId){
+
+const pages=document.querySelectorAll('.page')
+pages.forEach(p=>p.classList.remove('active'))
+
+document.getElementById(pageId).classList.add('active')
+
+window.scrollTo(0,0)
+}
+
+// 恋爱天数计算
+
+const startDate=new Date("2024-12-14")
+
+function updateLoveDays(){
+
+const today=new Date()
+
+const diff=today-startDate
+
+const days=Math.floor(diff/(1000*60*60*24))
+
+const el=document.getElementById("loveDays")
+
+if(el) el.innerText=days+" 天"
+}
+
+updateLoveDays()
+
+// 爱心动画
 
 function createHeart(){
 
